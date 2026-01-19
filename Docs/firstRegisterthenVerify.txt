@@ -1,0 +1,310 @@
+📌 PROMPT: Employer Registration Form (Phase 1 – Account Creation)
+
+Design a simple, high-conversion Employer Registration form for a modern job portal.
+The goal is to allow employers to quickly create an account while deferring company verification to a later step.
+
+🎯 Objective
+
+Minimize friction at signup
+
+Prevent bots and obvious scammers
+
+Allow employers to access dashboard
+
+Restrict job posting until company verification is complete
+
+🔹 Form Title
+
+“Create Employer Account”
+
+Subtext:
+
+“Register as an employer to hire talent. Company verification is required before posting jobs.”
+
+🔹 Required Fields
+👤 Personal Details
+
+Full Name
+
+Text input
+
+Required
+
+📧 Work Email Address
+
+Email input
+
+Must be a company domain
+
+Block free email providers (Gmail, Yahoo, Outlook, etc.)
+
+Email OTP verification required
+
+Helper text:
+
+“Please use your official company email address.”
+
+📱 Mobile Number
+
+Country code selector (default: India)
+
+Phone number input
+
+SMS OTP verification required
+
+🔐 Password Setup
+
+Password
+
+Confirm Password
+
+Password rules:
+
+Minimum 8 characters
+
+At least 1 uppercase letter
+
+At least 1 lowercase letter
+
+At least 1 number
+
+Include:
+
+Password strength indicator
+
+Show / hide password toggle
+
+🔹 CTA Button
+
+“Create Employer Account”
+
+🔹 Post-Registration Messaging (Very Important)
+
+After successful registration:
+
+Show a success screen or banner:
+
+✅ Account created successfully
+To post jobs and access candidates, please complete your company verification from your dashboard.
+
+CTA:
+“Go to Dashboard”
+
+🔹 Employer Account Status (System Controlled)
+
+Initial status: Registered (Unverified)
+
+Company verification: Pending
+
+Restrictions:
+
+❌ Job posting disabled
+
+❌ Candidate contact disabled
+
+❌ Promotions disabled
+
+🔹 UX & UI Guidelines
+
+Clean, professional look
+
+Employer-focused (not jobseeker-style)
+
+Clear microcopy explaining why verification is needed
+
+Mobile responsive
+
+Inline validation messages
+
+🔹 Security & Trust Measures
+
+Email OTP required before account activation
+
+Phone OTP required
+
+Rate limit OTP requests
+
+Log IP and signup attempts
+
+🔹 Footer Note (Small Text)
+
+“Company verification is mandatory to post jobs and protect job seekers from fraud.”
+
+🏁 End Goal
+
+Create a fast, secure employer onboarding experience that:
+
+Maximizes signup completion
+
+Protects candidates
+
+Prepares employers for mandatory company verification
+
+
+
+===================================================
+
+📌 PROMPT: Company Verification & Employer Permissions (Phase 2)
+
+Design a Company Verification flow inside the Employer Dashboard of a job portal.
+This flow is mandatory before an employer can post jobs or access candidates.
+
+🎯 Objectives
+
+Verify company legitimacy
+
+Prevent fake or scam employers
+
+Clearly communicate verification status
+
+Unlock employer features only after approval
+
+🔹 Entry Points to Verification
+
+Trigger company verification when employer:
+
+Clicks “Post a Job”
+
+Clicks “Verify Company” on dashboard banner
+
+Visits Company Profile page
+
+If company is not verified, redirect to verification flow.
+
+🔹 Dashboard Banner (Unverified State)
+
+Show a prominent banner:
+
+⚠️ Company Verification Required
+Complete company verification to post jobs and access candidates.
+
+CTA:
+“Verify Company Now”
+
+🔹 Step 1: Company Presence Question
+
+Ask a required question:
+
+“Do you have a registered Indian entity?”
+
+Options:
+
+✅ Yes, we have a registered Indian entity
+
+❌ No, we are a foreign company hiring in India
+
+Helper text:
+
+“This helps us verify your company and show trust badges to job seekers.”
+
+🔹 Step 2A: Indian Entity Verification (If YES)
+Section Title:
+
+Company Details (India)
+
+Required Fields:
+
+Company Legal Name
+
+Corporate Identification Number (CIN)
+
+Company Type (Private Ltd / Public Ltd / LLP)
+
+Registered Office Address
+
+Company Website
+
+LinkedIn Company Page
+
+Optional Fields:
+
+GSTIN
+
+Company Description
+
+Company Logo
+
+Verification Logic:
+
+Validate CIN format
+
+Fetch company data via MCA
+
+Ensure company status is Active
+
+Match legal name with MCA records
+
+Verify email domain matches company website
+
+Result:
+
+Status → Under Review → Verified
+
+Badge assigned → 🟢 MCA Verified Employer
+
+🔹 Step 2B: Foreign Company Verification (If NO)
+Section Title:
+
+Company Details (International)
+
+Required Fields:
+
+Company Legal Name
+
+Country of Registration
+
+Business Registration Number
+
+Company Website
+
+LinkedIn Company Page
+
+Official Company Email (domain-based)
+
+Optional:
+
+Hiring Model:
+
+Remote / Contract
+
+Hiring via Employer of Record (EOR)
+
+Verification Logic:
+
+Manual review required
+
+Verify website legitimacy
+
+Verify LinkedIn activity
+
+Verify email domain ownership
+
+Result:
+
+Status → Under Review → Verified
+
+Badge assigned → 🔵 International Employer
+
+🔹 Step 3: Declaration & Consent
+
+Require checkbox:
+
+“I confirm that the information provided is accurate and legally valid. I understand that false information may result in account suspension.”
+
+Submission disabled until checked.
+
+🔹 Step 4: Submission & Status Handling
+
+After submission:
+
+Show status page:
+
+🟡 Your company is under verification. This usually takes 24–48 hours.
+
+Employer can:
+
+View submitted details
+
+Edit until review starts
+
+Track verification status

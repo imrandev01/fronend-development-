@@ -1,0 +1,195 @@
+📌 DETAILED PROMPT: Employer Registration & Verification Flow (Job Portal – India Focused)
+
+Design a multi-step Employer Registration flow for a modern job portal with strong trust and verification. The goal is to verify employers properly while keeping the UX clean and professional.
+
+🔹 Overall Style
+
+Clean, modern, professional UI
+
+Trust-focused design (badges, clear status indicators)
+
+Mobile-responsive
+
+Minimal but clear micro-copy explaining why information is required
+
+🔹 Step 1: Employer Account Creation (Common for All)
+
+Create a form section titled “Create Employer Account” with the following fields:
+
+Full Name
+
+Work Email Address (company domain only; block Gmail/Yahoo)
+
+Mobile Number (OTP verification)
+
+Password
+
+Confirm Password
+
+Include:
+
+Email OTP verification
+
+Password strength indicator
+
+Small note: “Please use your official company email address”
+
+🔹 Step 2: Key Verification Question
+
+Show a clear, highlighted question:
+
+“Do you have a registered Indian entity?”
+
+Options (radio buttons or cards):
+
+✅ Yes, we have an Indian registered entity
+
+❌ No, we are a foreign company hiring in India
+
+Add helper text:
+
+“This helps us verify your company and show trust badges to job seekers.”
+
+🔹 Step 3A: If YES (Indian or Foreign-Owned Indian Entity)
+
+Show a section titled “Company Details (India)”
+
+Fields:
+
+Company Legal Name
+
+CIN (Corporate Identification Number)
+
+Company Type (Private Ltd / Public Ltd / LLP)
+
+Registered Office Address (auto-fill if possible)
+
+Date of Incorporation (read-only if auto-filled)
+
+Company Website
+
+LinkedIn Company Page
+
+Verification behavior:
+
+Validate CIN format
+
+Verify company status via MCA (Active only)
+
+Match company name with MCA records
+
+Verify email domain matches company website
+
+Result:
+
+Assign badge: 🟢 “MCA Verified Employer”
+
+🔹 Step 3B: If NO (Foreign Company Hiring in India)
+
+Show a section titled “Company Details (International)”
+
+Fields:
+
+Company Legal Name
+
+Country of Registration
+
+Business Registration Number
+
+Company Website
+
+LinkedIn Company Page
+
+Official Company Email (domain-based)
+
+Optional:
+
+Hiring model selection:
+
+Remote / Contract hiring
+
+Hiring via Employer of Record (EOR)
+
+Verification behavior:
+
+Manual review required
+
+Verify website legitimacy
+
+Verify LinkedIn company presence
+
+Verify email domain
+
+Result:
+
+Assign badge: 🔵 “International Employer”
+
+Optionally restrict job posting to remote/contract roles only
+
+🔹 Step 4: Declaration & Consent
+
+Include a required checkbox:
+
+“I confirm that the information provided is accurate and legally valid. I understand that false information may result in account suspension.”
+
+🔹 Step 5: Submission & Status
+
+After submission:
+
+Show status banner:
+
+🟡 “Your company is under verification. Job posting will be enabled once approved.”
+
+Verification statuses:
+
+Pending
+
+Under Review
+
+Verified
+
+Suspended
+
+🔹 Employer Dashboard Experience
+
+Display verification badge prominently
+
+Show verification status clearly
+
+Disable job posting until verification is complete
+
+Tooltips explaining verification badges
+
+🔹 Trust & Transparency for Job Seekers
+
+On every job listing and company profile:
+
+Show verification badge
+
+Show hiring model (Indian entity / International / EOR)
+
+Add small info tooltip explaining what the badge means
+
+🔹 Key Principles to Follow
+
+Trust-first design
+
+Clear separation between Indian and foreign employers
+
+No Gmail/Yahoo emails for employers
+
+Manual review for all foreign companies
+
+MCA verification mandatory for Indian entities
+
+🎯 End Goal
+
+A secure, scalable, and legally safe employer onboarding system that:
+
+Prevents fake employers
+
+Builds candidate trust
+
+Clearly communicates verification status
+
+Works for both Indian and international hiring companies

@@ -1,0 +1,5 @@
+slogan: Achieve your full potential
+
+- statsGrid is inactive
+
+now i want to work on jobs page: so i want nav bar to be same for job page as home page but below that i want to add An responsive icon-based grid component that has one header Find jobs with roles header, a search bar which has two input places in first there is a Department/industry Autocomplete search box with so many names coming in the dropdown can select 3 at most at a time, after selecting industry 2nd Autocomplete search box updates by those industry specific job roles only   where one can search/select department/industry then job role and search will update jobs section roles lets users quickly explore or filter jobs by predefined roles or categories, Experience level, Location, Department/industry, Role category, Salary,  Company type , Work mode , Top companies, 
