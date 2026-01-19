@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import Button from '../Common/Button';
+import Button from '../../Common/Button';
 
 export default function RegistrationSuccess({ onGoToDashboard }) {
   return (
