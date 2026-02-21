@@ -21,6 +21,19 @@ const requiredFields = [
 const requiredDocuments = ['registration', 'taxDocument', 'addressProof', 'panCard'];
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 8 * 1024 * 1024 } });
 
+let submissionWriteQueue = Promise.resolve();
+
+async function appendSubmission(submission) {
+  const writeTask = submissionWriteQueue.then(async () => {
+    const submissions = await readSubmissions();
+    submissions.push(submission);
+    await writeSubmissions(submissions);
+  });
+
+  submissionWriteQueue = writeTask.catch(() => {});
+  await writeTask;
+}
+
 export function createApp() {
   const app = express();
 
@@ -61,9 +74,7 @@ export function createApp() {
       })),
     };
 
-    const submissions = await readSubmissions();
-    submissions.push(submission);
-    await writeSubmissions(submissions);
+    await appendSubmission(submission);
 
     return res.status(201).json({
       message: 'Company verification submitted successfully',
