@@ -10,19 +10,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const dataFile = path.resolve(__dirname, '../data/company-verifications.json');
 
-function buildSubmission(req, suffix) {
+function buildSubmission(req, suffix, overrides = {}) {
+  const fields = {
+    companyName: `Acme Inc ${suffix}`,
+    registrationNumber: `REG-${suffix}`,
+    taxId: `TAX-${suffix}`,
+    industry: 'Technology',
+    companySize: '11-50',
+    yearEstablished: '2020',
+    website: 'https://acme.example',
+    address: 'Main Street',
+    contactEmail: `hr+${suffix}@acme.example`,
+    contactPhone: '+123456789',
+    description: 'A'.repeat(60),
+    ...overrides,
+  };
+
+  Object.entries(fields).forEach(([key, value]) => {
+    req.field(key, value);
+  });
+
   return req
-    .field('companyName', `Acme Inc ${suffix}`)
-    .field('registrationNumber', `REG-${suffix}`)
-    .field('taxId', `TAX-${suffix}`)
-    .field('industry', 'Technology')
-    .field('companySize', '11-50')
-    .field('yearEstablished', '2020')
-    .field('website', 'https://acme.example')
-    .field('address', 'Main Street')
-    .field('contactEmail', `hr+${suffix}@acme.example`)
-    .field('contactPhone', '+123456789')
-    .field('description', 'A'.repeat(60))
     .attach('registration', Buffer.from('doc-1'), 'registration.pdf')
     .attach('taxDocument', Buffer.from('doc-2'), 'tax.pdf')
     .attach('addressProof', Buffer.from('doc-3'), 'address.pdf')
@@ -52,6 +60,19 @@ test('company verification submission accepts valid payload', async () => {
   assert.equal(stored.length, 1);
   assert.equal(stored[0].company.companyName, 'Acme Inc 1');
   assert.equal(stored[0].documents.length, 4);
+});
+
+test('company verification rejects invalid company metadata', async () => {
+  const app = createApp();
+  const response = await buildSubmission(request(app).post('/api/company-verifications'), 'invalid', {
+    yearEstablished: '3020',
+    website: 'ftp://acme.example',
+    contactEmail: 'invalid-email',
+  });
+
+  assert.equal(response.status, 400);
+  assert.equal(response.body.error, 'Validation failed');
+  assert.deepEqual(response.body.invalidFields.sort(), ['contactEmail', 'website', 'yearEstablished']);
 });
 
 test('company verification submissions are not lost during concurrent requests', async () => {

@@ -21,13 +21,29 @@ async function ensureDataFile() {
 export async function readSubmissions() {
   await ensureDataFile();
   const raw = await fs.readFile(DATA_FILE, 'utf8');
-  return JSON.parse(raw);
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    throw new Error('Failed to parse submission storage JSON file');
+  }
+
+  if (!Array.isArray(parsed)) {
+    throw new Error('Submission storage JSON must be an array');
+  }
+
+  return parsed;
 }
 
 export async function writeSubmissions(submissions) {
+  if (!Array.isArray(submissions)) {
+    throw new TypeError('submissions must be an array');
+  }
+
   await ensureDataFile();
   const payload = JSON.stringify(submissions, null, 2);
-  const tempFile = `${DATA_FILE}.tmp`;
+  const tempFile = `${DATA_FILE}.${process.pid}.${Date.now()}.tmp`;
   await fs.writeFile(tempFile, payload, 'utf8');
   await fs.rename(tempFile, DATA_FILE);
 }
