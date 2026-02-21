@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import crypto from 'node:crypto';
-import { readSubmissions, writeSubmissions } from './storage.js';
+import { appendSubmission, readSubmissions } from './storage.js';
 
 const requiredFields = [
   'companyName',
@@ -61,9 +61,13 @@ export function createApp() {
       })),
     };
 
-    const submissions = await readSubmissions();
-    submissions.push(submission);
-    await writeSubmissions(submissions);
+    try {
+      await appendSubmission(submission);
+    } catch {
+      return res.status(500).json({
+        error: 'Unable to persist company verification submission',
+      });
+    }
 
     return res.status(201).json({
       message: 'Company verification submitted successfully',
