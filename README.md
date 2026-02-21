@@ -1,9 +1,12 @@
 # TrustCareer Monorepo
 
-This project is split into two folders in the same repository:
+This repository is separated by responsibility:
 
 - `frontend/` → React + Vite application
-- `backend/` → Express API for company verification
+- `backend/` → Express API
+- `docs/` → architecture and implementation documentation
+
+> Root files like `package.json`, `.gitignore`, and `README.md` are repository-level orchestration files.
 
 ## Run locally
 
@@ -43,3 +46,11 @@ npm run test:backend
 - `GET /api/health`
 - `GET /api/company-verifications`
 - `POST /api/company-verifications`
+
+## Additional docs
+
+- `docs/REPOSITORY_STRUCTURE.md`
+- `docs/ARCHITECTURE/ARCHITECTURE.md`
+- `docs/IMPLEMENTATION_SUMMARY.md`
+- `docs/frontend/README.md`
+- `docs/backend/README.md`
