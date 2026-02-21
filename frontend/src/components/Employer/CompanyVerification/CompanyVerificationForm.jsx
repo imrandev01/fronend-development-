@@ -194,16 +194,40 @@ const CompanyVerificationForm = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+      const payload = new FormData();
 
-      // Here you would normally send formData to your backend
-      console.log('Form Data:', formData);
+      payload.append('companyName', formData.companyName);
+      payload.append('registrationNumber', formData.registrationNumber);
+      payload.append('taxId', formData.taxId);
+      payload.append('industry', formData.industry);
+      payload.append('companySize', formData.companySize);
+      payload.append('yearEstablished', formData.yearEstablished);
+      payload.append('website', formData.website);
+      payload.append('address', formData.address);
+      payload.append('contactEmail', formData.contactEmail);
+      payload.append('contactPhone', formData.contactPhone);
+      payload.append('description', formData.description);
+
+      Object.entries(formData.documents).forEach(([key, value]) => {
+        if (value) {
+          payload.append(key, value);
+        }
+      });
+
+      const response = await fetch(`${apiBase}/company-verifications`, {
+        method: 'POST',
+        body: payload,
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
 
       setIsSubmitted(true);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('An error occurred. Please try again.');
+      alert('An error occurred while submitting verification. Please try again.');
     } finally {
       setIsLoading(false);
     }
