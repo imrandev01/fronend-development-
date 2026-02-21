@@ -1,16 +1,45 @@
-# React + Vite
+# TrustCareer Monorepo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is split into two folders in the same repository:
 
-Currently, two official plugins are available:
+- `frontend/` → React + Vite application
+- `backend/` → Express API for company verification
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run locally
 
-## React Compiler
+### 1) Install dependencies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm --prefix frontend install
+npm --prefix backend install
+```
 
-## Expanding the ESLint configuration
+### 2) Start backend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev:backend
+```
+
+### 3) Start frontend
+
+```bash
+npm run dev:frontend
+```
+
+## Root scripts
+
+```bash
+npm run dev:frontend
+npm run build:frontend
+npm run lint:frontend
+npm run preview:frontend
+npm run dev:backend
+npm run start:backend
+npm run test:backend
+```
+
+## API endpoints
+
+- `GET /api/health`
+- `GET /api/company-verifications`
+- `POST /api/company-verifications`
